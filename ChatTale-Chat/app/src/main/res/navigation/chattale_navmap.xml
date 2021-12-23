@@ -29,7 +29,8 @@
             app:destination="@id/chattingFragment" />
         <action
             android:id="@+id/action_chatListFragment_to_newChatFragment"
-            app:destination="@id/newChatFragment" />
+            app:destination="@id/newChatFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/initFragment"
@@ -53,5 +54,20 @@
         <action
             android:id="@+id/action_registerFragment_to_chatListFragment"
             app:destination="@id/chatListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingFragment"
+        android:name="com.example.chattale_chat.ChattingFragment"
+        android:label="fragment_chatting"
+        tools:layout="@layout/fragment_chatting" />
+    <fragment
+        android:id="@+id/newChatFragment"
+        android:name="com.example.chattale_chat.NewChatFragment"
+        android:label="fragment_new_chat"
+        tools:layout="@layout/fragment_new_chat" >
+        <action
+            android:id="@+id/action_newChatFragment_to_chattingFragment"
+            app:destination="@id/chattingFragment"
+            app:popUpTo="@id/newChatFragment" />
     </fragment>
 </navigation>
