@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "524777507282",
+    "project_id": "chattale-chatsystems",
+    "storage_bucket": "chattale-chatsystems.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524777507282:android:41fc75264ac8c02d0a200b",
+        "android_client_info": {
+          "package_name": "com.example.chattale_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524777507282-kbgfjp7k7gv58egrafdn0qqld3h4st3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZln5vuC42pKDNIC0LfbuxrFgY71z66_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524777507282-kbgfjp7k7gv58egrafdn0qqld3h4st3h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
