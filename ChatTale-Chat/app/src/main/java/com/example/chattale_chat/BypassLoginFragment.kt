@@ -1,14 +1,13 @@
 package com.example.chattale_chat
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Button
+import android.widget.EditText
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [InitFragment.newInstance] factory method to
+ * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class InitFragment : Fragment() {
+class BypassLoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,23 +37,32 @@ class InitFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_init, container, false)
+        return inflater.inflate(R.layout.fragment_bypass_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // init all statics
-        MainActivity.ChatroomList = mutableListOf()
-        MainActivity.CurrentAccount = Account(null, null, null)
-        MainActivity.CurrentChatRoom = Chatroom(null, null, null, null)
-        MainActivity.DB = FirebaseFirestore.getInstance()
+        // THIS IS VERY VERY WRONG TO DO, WINSON, THIS IS UR PART YE
 
-        // scuff splashscreen
-        Handler(Looper.getMainLooper()).postDelayed({
+        val usernameInput = view.findViewById<EditText>(R.id.username_input)
+        val loginButton = view.findViewById<Button>(R.id.login_button)
 
-            findNavController().navigate(R.id.action_initFragment_to_loginFragment)
-        }, 2000)
+
+        loginButton.setOnClickListener {
+            // DISCLAIMER, THIS IS TEMPORARY
+            // on login click, create new account and push to server
+            val usernameString = usernameInput.text.toString()
+            // WARN! no username checking + username length check + etc!
+            MainActivity.CurrentAccount = Account(usernameString,true,usernameString)
+            // set username of collection "Accounts" with the Account object just created
+            MainActivity.DB.collection("Accounts").document(usernameString).set(MainActivity.CurrentAccount).addOnSuccessListener {
+                // then if success go to chat list
+                findNavController().navigate(R.id.action_bypassLoginFragment_to_chatListFragment)
+            }
+            // WARN! no on failed listener!
+        }
+
     }
 
     companion object {
@@ -64,12 +72,12 @@ class InitFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment InitFragment.
+         * @return A new instance of fragment LoginFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            InitFragment().apply {
+            LoginFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

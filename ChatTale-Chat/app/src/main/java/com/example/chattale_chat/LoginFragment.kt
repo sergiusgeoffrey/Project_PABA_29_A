@@ -73,6 +73,13 @@ class LoginFragment : Fragment() {
         val passwordInput = view.findViewById<EditText>(R.id.password_input)
         val loginButton = view.findViewById<Button>(R.id.login_button)
         val register = view.findViewById<TextView>(R.id.register_text)
+        val bypassLoginButton = view.findViewById<TextView>(R.id.bypasslogin_text)
+
+        bypassLoginButton.setOnClickListener {
+
+            findNavController().navigate(R.id.action_loginFragment_to_bypassLoginFragment)
+
+        }
 
         register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)

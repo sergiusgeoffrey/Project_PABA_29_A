@@ -44,6 +44,17 @@
             android:clickable="true"
             android:ems="10"
             android:text="register" />
+
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/bypasslogin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:clickable="true"
+        android:ems="10"
+        android:text="bypass" />
 
 </FrameLayout>
