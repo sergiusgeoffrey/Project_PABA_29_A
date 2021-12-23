@@ -3,7 +3,7 @@ package com.example.chattale_chat
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Chatroom(var chatroomID : String, var displayName: String, var members: Array<String>, var lastMessage: Message) :
+data class Chatroom(var chatroomID: String?, var displayName: String?, var members: Array<String>?, var lastMessage: Message?) :
     Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),

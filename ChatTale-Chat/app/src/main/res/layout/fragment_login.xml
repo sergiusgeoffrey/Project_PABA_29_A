@@ -18,7 +18,7 @@
             android:layout_margin="50dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="username" />
+            android:hint="username" />
 
         <Button
             android:id="@+id/login_button"

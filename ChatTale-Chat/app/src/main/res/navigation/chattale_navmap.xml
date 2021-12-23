@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chattale_navmap"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/initFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_loginFragment_to_chatListFragment"
             app:destination="@id/chatListFragment"
-            app:popUpTo="@id/chatListFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -21,4 +21,15 @@
         android:name="com.example.chattale_chat.ChatListFragment"
         android:label="fragment_chat_list"
         tools:layout="@layout/fragment_chat_list" />
+    <fragment
+        android:id="@+id/initFragment"
+        android:name="com.example.chattale_chat.InitFragment"
+        android:label="fragment_init"
+        tools:layout="@layout/fragment_init" >
+        <action
+            android:id="@+id/action_initFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/initFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

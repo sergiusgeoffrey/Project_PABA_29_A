@@ -3,7 +3,7 @@ package com.example.chattale_chat
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Account(var username : String, var isAnonymous : Boolean, var displayName: String) :
+data class Account(var username: String?, var isAnonymous: Boolean?, var displayName: String?) :
     Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
@@ -14,7 +14,7 @@ data class Account(var username : String, var isAnonymous : Boolean, var display
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(username)
-        parcel.writeByte(if (isAnonymous) 1 else 0)
+        parcel.writeByte(if (isAnonymous == true) 1 else 0)
         parcel.writeString(displayName)
     }
 
