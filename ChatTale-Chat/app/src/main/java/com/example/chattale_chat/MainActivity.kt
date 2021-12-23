@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var CurrentAccount : Account
         lateinit var ChatroomList : MutableList<Chatroom>
-        lateinit var CurrentChatRoom: Chatroom
+        lateinit var CurrentChatroom: Chatroom
         lateinit var DB : FirebaseFirestore
         var GlobalRefreshMS : Long = 500
     }

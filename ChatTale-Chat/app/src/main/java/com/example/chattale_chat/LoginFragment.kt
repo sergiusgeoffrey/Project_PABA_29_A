@@ -1,20 +1,19 @@
 package com.example.chattale_chat
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.TextUtils
+import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.auth.FirebaseAuthCredentialsProvider
-import android.text.TextUtils
-import android.util.Log
-import android.util.Patterns
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,7 +53,7 @@ class LoginFragment : Fragment() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
             //reload();
         }
     }
@@ -75,11 +74,12 @@ class LoginFragment : Fragment() {
         val register = view.findViewById<TextView>(R.id.register_text)
         val bypassLoginButton = view.findViewById<TextView>(R.id.bypasslogin_text)
 
+        // TEMPORARY
         bypassLoginButton.setOnClickListener {
-
             findNavController().navigate(R.id.action_loginFragment_to_bypassLoginFragment)
 
         }
+        // TEMPORARY
 
         register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -104,7 +104,7 @@ class LoginFragment : Fragment() {
             if (isValidEmail(email)) {
                 //check email and password
                 auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {task ->
+                    .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Sign in success
                             Log.d("login_success", "signInWithEmail:success")
@@ -114,15 +114,17 @@ class LoginFragment : Fragment() {
                         } else {
                             // Sign in failed
                             Log.d("login_failed", "signInWithEmail:failure", task.exception)
-                            Toast.makeText(this.context, "Wrong password/email.",
-                                Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this.context, "Wrong password/email.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
-            }
-            else
-            {
-                Toast.makeText(this.context, "Invalid Email.",
-                    Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this.context, "Invalid Email.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }

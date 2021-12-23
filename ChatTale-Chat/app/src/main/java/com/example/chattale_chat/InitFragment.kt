@@ -47,7 +47,7 @@ class InitFragment : Fragment() {
         // init all statics
         MainActivity.ChatroomList = mutableListOf()
         MainActivity.CurrentAccount = Account(null, null, null)
-        MainActivity.CurrentChatRoom = Chatroom(null, null, null, null)
+        MainActivity.CurrentChatroom = Chatroom(null, null, null, null)
         MainActivity.DB = FirebaseFirestore.getInstance()
 
         // scuff splashscreen

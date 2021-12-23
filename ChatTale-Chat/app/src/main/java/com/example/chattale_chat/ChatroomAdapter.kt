@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
@@ -86,7 +85,34 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
                         newLastMessage
                     )
 
-                    MainActivity.CurrentChatRoom = newChatroom
+                    MainActivity.CurrentChatroom = newChatroom
+                    navController.navigate(R.id.action_chatListFragment_to_chattingFragment)
+                }
+        }
+
+        holder.chatroomDisplayName.setOnClickListener {
+
+            MainActivity.DB.collection("Chatrooms").document(currentChatroom!!.chatroomID!!).get()
+                .addOnSuccessListener { document ->
+                    val newLastMessageHashMap: HashMap<String, Any> =
+                        document.get("lastMessage") as HashMap<String, Any>
+                    val newLastMessage = Message(
+                        newLastMessageHashMap["messageID"] as String?,
+                        newLastMessageHashMap["chatroomID"] as String?,
+                        newLastMessageHashMap["fromUsername"] as String?,
+                        newLastMessageHashMap["timestamp"] as Long?,
+                        newLastMessageHashMap["message"] as String?,
+                        newLastMessageHashMap["isSystem"] as Boolean?
+                    )
+
+                    val newChatroom = Chatroom(
+                        document.get("chatroomID") as String?,
+                        document.get("displayName") as String?,
+                        document.get("members") as List<String>?,
+                        newLastMessage
+                    )
+
+                    MainActivity.CurrentChatroom = newChatroom
                     navController.navigate(R.id.action_chatListFragment_to_chattingFragment)
                 }
         }
@@ -116,13 +142,7 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
                     newmember.remove(MainActivity.CurrentAccount.username)
                     newChatroom.members = newmember.toList()
 
-                    if (newmember.size > 0) {
-                        MainActivity.DB.collection("Chatrooms")
-                            .document(currentChatroom!!.chatroomID!!).set(newChatroom)
-                    } else {
-                        MainActivity.DB.collection("Chatrooms")
-                            .document(currentChatroom!!.chatroomID!!).delete()
-                    }
+
 
                     val uuid = UUID.randomUUID()
                     val randomUUIDString = uuid.toString()
@@ -137,6 +157,16 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
                         MainActivity.CurrentAccount.username + " has left the chat",
                         true
                     )
+
+                    newChatroom.lastMessage = exitMessage
+
+                    if (newmember.size > 0) {
+                        MainActivity.DB.collection("Chatrooms")
+                            .document(currentChatroom!!.chatroomID!!).set(newChatroom)
+                    } else {
+                        MainActivity.DB.collection("Chatrooms")
+                            .document(currentChatroom!!.chatroomID!!).delete()
+                    }
 
                     MainActivity.DB.collection("Messages").document(exitMessage!!.messageID!!).set(exitMessage)
                 }
