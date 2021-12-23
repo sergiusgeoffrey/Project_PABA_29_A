@@ -3,20 +3,24 @@ package com.example.chattale_chat
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Chatroom(var chatroomID: String?, var displayName: String?, var members: Array<String>?, var lastMessage: Message?) :
-    Parcelable {
+data class Chatroom(
+    var chatroomID: String?,
+    var displayName: String?,
+    var members: List<String>?,
+    var lastMessage: Message?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.createStringArray()!!,
-        parcel.readParcelable(Message::class.java.classLoader)!!
+        parcel.readString(),
+        parcel.readString(),
+        parcel.createStringArrayList(),
+        parcel.readParcelable(Message::class.java.classLoader)
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(chatroomID)
         parcel.writeString(displayName)
-        parcel.writeStringArray(members)
+        parcel.writeStringList(members)
         parcel.writeParcelable(lastMessage, flags)
     }
 

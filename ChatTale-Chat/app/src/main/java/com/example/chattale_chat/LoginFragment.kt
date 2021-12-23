@@ -52,9 +52,10 @@ class LoginFragment : Fragment() {
         loginButton.setOnClickListener {
             // DISCLAIMER, THIS IS TEMPORARY
             // on login click, create new account and push to server
-            val usernameString = usernameInput.text.toString()
+            var usernameString = usernameInput.text.toString()
             // WARN! no username checking + username length check + etc!
-            MainActivity.CurrentAccount = Account(usernameString,true,usernameString)
+            // username is lowered to prevent confusion! displayname empty!
+            MainActivity.CurrentAccount = Account(usernameString.lowercase(),true,"")
             // set username of collection "Accounts" with the Account object just created
             MainActivity.DB.collection("Accounts").document(usernameString).set(MainActivity.CurrentAccount).addOnSuccessListener {
                 // then if success go to chat list

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:id="@+id/chatroom_comp_body"
+    android:background="#77EE88">
+
+    <ImageView
+        android:id="@+id/chatroom_comp_displaypic"
+        android:layout_gravity="center"
+        android:paddingLeft="15dp"
+        android:scaleY="1.75"
+        android:scaleX="1.75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_person_24"
+        />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/chatroom_comp_displayname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="chatroomname"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/chatroom_comp_lastmessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="lastmessage"
+            android:visibility="visible"
+            android:textSize="13sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/chatroom_comp_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/10/10 10:10"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="10sp" />
+
+    <ImageButton
+        android:id="@+id/chatroom_comp_leave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_logout_24"
+        android:background="#00000000"
+        android:scaleY="1.25"
+        android:scaleX="1.25"
+        android:layout_gravity="center"
+        android:paddingRight="15dp"
+        android:visibility="visible"
+        />
+
+
+</LinearLayout>
