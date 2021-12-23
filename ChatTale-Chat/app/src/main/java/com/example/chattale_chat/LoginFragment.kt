@@ -13,6 +13,7 @@ import com.google.firebase.firestore.auth.FirebaseAuthCredentialsProvider
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
+import android.widget.TextView
 import android.widget.Toast
 
 
@@ -71,7 +72,11 @@ class LoginFragment : Fragment() {
         val usernameInput = view.findViewById<EditText>(R.id.username_input)
         val passwordInput = view.findViewById<EditText>(R.id.password_input)
         val loginButton = view.findViewById<Button>(R.id.login_button)
+        val register = view.findViewById<TextView>(R.id.register_text)
 
+        register.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
 
         loginButton.setOnClickListener {
             // DISCLAIMER, THIS IS TEMPORARY
