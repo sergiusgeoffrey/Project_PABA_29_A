@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var CurrentChatroom: Chatroom
         lateinit var DB : FirebaseFirestore
         lateinit var auth: FirebaseAuth
-        var GlobalRefreshMS : Long = 500
+        var GlobalRefreshMS : Long = 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -43,7 +43,7 @@ class MessageAdapter(private val messageList: List<Message>) :
         calins.timeInMillis = currentMessage.timestamp!!
         val myFormat = "dd/MM/yyyy hh:mm"
         val sdf = SimpleDateFormat(myFormat)
-        
+
         if(currentMessage.isSystem == true){
             holder.systemBody.visibility = View.VISIBLE
             holder.systemMessage.text = currentMessage.message
