@@ -31,15 +31,18 @@
                 android:background="#00000000"
                 android:paddingLeft="15dp"
                 android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginEnd="32dp"
                 android:gravity="center"
-                android:paddingLeft="15dp"
+                android:paddingLeft="16dp"
                 android:text="Create new chatroom"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:layout_gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
                 android:hint="Display name" />
 
@@ -78,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginStart="12dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:hint="Invite username..." />
@@ -87,6 +92,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:scaleX="1.5"
@@ -99,8 +105,12 @@
             android:id="@+id/new_chat_member_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/new_chat_create_button"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="179dp" />
 
         <Button
             android:id="@+id/new_chat_create_button"

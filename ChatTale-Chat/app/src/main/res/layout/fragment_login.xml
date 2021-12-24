@@ -11,39 +11,63 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/judul_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Login"
+            android:textSize="40sp"
+            tools:textStyle="bold" />
+
         <EditText
             android:id="@+id/username_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="username"
-            android:inputType="textWebEmailAddress|textPersonName" />
+            android:inputType="textWebEmailAddress|textPersonName"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:text="Login" />
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            android:text="Login"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_gravity="clip_vertical|center_horizontal"
+            android:layout_marginTop="4dp"
             android:clickable="true"
-            android:ems="10"
-            android:text="register" />
+            android:gravity="center"
+            android:minWidth="32dp"
+            android:minHeight="48dp"
+            android:text="Register"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -52,9 +76,10 @@
         android:id="@+id/bypasslogin_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_margin="20dp"
         android:clickable="true"
         android:ems="10"
+        android:minHeight="48dp"
         android:text="bypass" />
 
 </FrameLayout>

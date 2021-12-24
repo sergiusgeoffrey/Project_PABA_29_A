@@ -7,21 +7,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/judul_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Register"
+            android:textSize="40sp"
+            tools:textStyle="bold" />
 
         <EditText
             android:id="@+id/input_email_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/input_password_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="password"
             android:inputType="textPassword"
@@ -31,6 +49,9 @@
             android:id="@+id/input_confirm_password_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="confirm password"
             android:inputType="textPassword"
@@ -40,6 +61,9 @@
             android:id="@+id/input_name_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="Display name"
             android:inputType="textPersonName"
@@ -49,15 +73,25 @@
             android:id="@+id/button_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register" />
+            android:layout_gravity="center"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="36dp"
+            android:text="Register"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/login_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical|center_horizontal"
+            android:layout_marginTop="4dp"
             android:clickable="true"
+            android:gravity="center"
             android:minWidth="32dp"
             android:minHeight="48dp"
-            android:text="login" />
+            android:text="Log-In"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>

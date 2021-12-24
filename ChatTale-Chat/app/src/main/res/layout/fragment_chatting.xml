@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#77EE88">
 
 
         <LinearLayout
@@ -23,17 +24,23 @@
 
             <ImageButton
                 android:id="@+id/back_button"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="4dp"
                 android:background="#00000000"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:paddingLeft="15dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <TextView
                 android:id="@+id/chatroomname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="8dp"
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:text="Anonymous Duck and 1 Other"
@@ -46,12 +53,13 @@
             android:id="@+id/message_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-
-            android:background="#77EE88"/>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -67,11 +75,10 @@
                 android:id="@+id/message_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Type your Message"
+                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:layout_gravity="center"
-                />
+                android:hint="Type your Message" />
 
             <ImageButton
                 android:id="@+id/send_button"
@@ -82,7 +89,8 @@
                 android:background="#00000000"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
-                android:src="@drawable/ic_baseline_send_24" />
+                android:src="@drawable/ic_baseline_send_24"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
