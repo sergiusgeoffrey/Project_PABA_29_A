@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +29,6 @@ class RegisterFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +45,16 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
         val emailInput = view.findViewById<EditText>(R.id.input_email_register)
         val passwordInput = view.findViewById<EditText>(R.id.input_password_register)
         val confirmPassword = view.findViewById<EditText>(R.id.input_confirm_password_register)
         val nameInput = view.findViewById<EditText>(R.id.input_name_register)
         val registerButton = view.findViewById<Button>(R.id.button_register)
+        val loginButton = view.findViewById<TextView>(R.id.login_text)
+
+        loginButton.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
         registerButton.setOnClickListener {
             val email = emailInput.text.toString()
@@ -64,14 +68,27 @@ class RegisterFragment : Fragment() {
                 {
                     if(display_name != "")
                     {
-                        auth.createUserWithEmailAndPassword(email, password)
+                        MainActivity.auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("register_success", "createUserWithEmail:success")
-                                    val user = auth.currentUser?.uid
-                                    MainActivity.CurrentAccount = Account(user,true,display_name)
-                                    Log.d("account", MainActivity.CurrentAccount.toString())
+                                    val user = MainActivity.auth.currentUser?.uid
+                                    // set username of collection "Accounts" with the Account object just created
+                                    if (user != null) {
+                                        MainActivity.CurrentAccount = Account(user,true,display_name)
+                                        Log.d("account", MainActivity.CurrentAccount.toString())
+                                        MainActivity.DB.collection("Accounts").document(user).set(MainActivity.CurrentAccount).addOnSuccessListener {
+                                            // then if success go to chat list
+                                            findNavController().navigate(R.id.action_registerFragment_to_chatListFragment)
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Log.d("register_failed", "createUserWithEmail:failure", task.exception)
+                                        Toast.makeText(this.context, "Registration failed.",
+                                            Toast.LENGTH_SHORT).show()
+                                    }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.d("register_failed", "createUserWithEmail:failure", task.exception)
@@ -83,16 +100,22 @@ class RegisterFragment : Fragment() {
                     else
                     {
                         //display name empty
+                        Toast.makeText(this.context, "Display Name cannot be empty",
+                            Toast.LENGTH_SHORT).show()
                     }
                 }
                 else
                 {
                     //incorrect password
+                    Toast.makeText(this.context, "Password Incorrect.",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
             else
             {
                 //wrong email format
+                Toast.makeText(this.context, "Enter a valid email.",
+                    Toast.LENGTH_SHORT).show()
             }
 
         }

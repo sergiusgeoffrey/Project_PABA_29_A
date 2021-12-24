@@ -31,8 +31,6 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    lateinit var auth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,9 +50,25 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        val currentUser = MainActivity.auth.currentUser
         if (currentUser != null) {
-            //reload();
+            val uid = MainActivity.auth.currentUser?.uid.toString()
+            MainActivity.DB.collection("Accounts").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if(document != null)
+                    {
+                        //MainActivity.CurrentAccount = document.data
+                        val data = document.data
+                        val username = data?.get("username").toString()
+                        val displayName = data?.get("displayName").toString()
+                        val anonymous = data?.get("anonymous").toString().toBoolean()
+                        if(username != null && displayName != null && anonymous != null)
+                        {
+                            MainActivity.CurrentAccount = Account(username, anonymous, displayName)
+                        }
+                        findNavController().navigate(R.id.action_loginFragment_to_chatListFragment)
+                    }
+                }
         }
     }
 
@@ -67,7 +81,6 @@ class LoginFragment : Fragment() {
 
         // THIS IS VERY VERY WRONG TO DO, WINSON, THIS IS UR PART YE
 
-        auth = FirebaseAuth.getInstance()
         val usernameInput = view.findViewById<EditText>(R.id.username_input)
         val passwordInput = view.findViewById<EditText>(R.id.password_input)
         val loginButton = view.findViewById<Button>(R.id.login_button)
@@ -86,31 +99,39 @@ class LoginFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
-            // DISCLAIMER, THIS IS TEMPORARY
-            // on login click, create new account and push to server
-            //val usernameString = usernameInput.text.toString()
-            // WARN! no username checking + username length check + etc!
-            //MainActivity.CurrentAccount = Account(usernameString,true,usernameString)
-            // set username of collection "Accounts" with the Account object just created
-            //MainActivity.DB.collection("Accounts").document(usernameString).set(MainActivity.CurrentAccount).addOnSuccessListener {
-            // then if success go to chat list
-            //findNavController().navigate(R.id.action_loginFragment_to_chatListFragment)
-            //}
-            // WARN! no on failed listener!
 
             val email = usernameInput.text.toString()
             val password = passwordInput.text.toString()
             //validate email
             if (isValidEmail(email)) {
                 //check email and password
-                auth.signInWithEmailAndPassword(email, password)
+                MainActivity.auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Sign in success
                             Log.d("login_success", "signInWithEmail:success")
-                            val user = auth.currentUser
+                            val user = MainActivity.auth.currentUser
                             Log.d("user", user.toString())
-                            findNavController().navigate(R.id.action_loginFragment_to_chatListFragment)
+                            val uid = MainActivity.auth.currentUser?.uid.toString()
+                            MainActivity.DB.collection("Accounts").document(uid).get()
+                                .addOnSuccessListener { document ->
+                                    if(document != null)
+                                    {
+                                        //MainActivity.CurrentAccount = document.data
+                                        val data = document.data
+                                        val username = data?.get("username").toString()
+                                        val displayName = data?.get("displayName").toString()
+                                        val anonymous = data?.get("anonymous").toString().toBoolean()
+                                        if(username != null && displayName != null && anonymous != null)
+                                        {
+                                            MainActivity.CurrentAccount = Account(username, anonymous, displayName)
+                                        }
+                                        findNavController().navigate(R.id.action_loginFragment_to_chatListFragment)
+                                    }
+                                }
+                                .addOnFailureListener {
+                                        Toast.makeText(this.context, "Login Failed", Toast.LENGTH_SHORT).show()
+                                }
                         } else {
                             // Sign in failed
                             Log.d("login_failed", "signInWithEmail:failure", task.exception)

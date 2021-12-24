@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,12 @@ class ChatListFragment : Fragment() {
                 refreshChatrooms()
             }
         }, 0, MainActivity.GlobalRefreshMS)
+
+        val logoutButton = view.findViewById<ImageView>(R.id.logout_image)
+        logoutButton.setOnClickListener{
+            MainActivity.auth.signOut()
+            findNavController().navigate(R.id.action_chatListFragment_to_loginFragment)
+        }
 
         val newChatButton = view.findViewById<FloatingActionButton>(R.id.new_chat_button)
         newChatButton.setOnClickListener {

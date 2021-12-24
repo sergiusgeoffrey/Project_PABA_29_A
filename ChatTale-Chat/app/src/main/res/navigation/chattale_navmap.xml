@@ -36,6 +36,9 @@
             android:id="@+id/action_chatListFragment_to_newChatFragment"
             app:destination="@id/newChatFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_chatListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/initFragment"
