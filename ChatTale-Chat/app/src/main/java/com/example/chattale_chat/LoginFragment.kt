@@ -89,6 +89,11 @@ class LoginFragment : Fragment() {
         val loginButton = view.findViewById<Button>(R.id.login_button)
         val register = view.findViewById<TextView>(R.id.register_text)
         val bypassLoginButton = view.findViewById<TextView>(R.id.bypasslogin_text)
+        val reset = view.findViewById<TextView>(R.id.reset_password_text)
+
+        reset.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_resetPassword)
+        }
 
         // TEMPORARY
         bypassLoginButton.setOnClickListener {

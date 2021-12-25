@@ -39,9 +39,10 @@
         <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_chat_list.xml" value="0.264" />
         <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_chatting.xml" value="0.11594202898550725" />
         <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_init.xml" value="0.11594202898550725" />
-        <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_login.xml" value="0.11594202898550725" />
+        <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_login.xml" value="0.176" />
         <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_new_chat.xml" value="0.11594202898550725" />
         <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_register.xml" value="0.11594202898550725" />
+        <entry key="..\:/_Kuliah/_semester5/Android/Project_PABA_29_A/ChatTale-Chat/app/src/main/res/layout/fragment_reset_password.xml" value="0.264" />
       </map>
     </option>
   </component>
