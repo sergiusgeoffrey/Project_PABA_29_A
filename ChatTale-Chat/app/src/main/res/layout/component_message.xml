@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,17 +57,18 @@
         <TextView
             android:id="@+id/message_comp_timestamp_receive"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10/10/10 10:10"
-            android:layout_gravity="center|top"
-            android:visibility="visible"
-            android:paddingRight="10dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|center_horizontal"
+            android:gravity="center"
             android:paddingLeft="10dp"
-            android:textSize="10sp" />
+            android:paddingRight="10dp"
+            android:text="10/10/10 10:10"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,13 +80,14 @@
         <TextView
             android:id="@+id/message_comp_timestamp_send"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10/10/10 10:10"
+            android:layout_height="match_parent"
             android:layout_gravity="center|top"
-            android:visibility="visible"
+            android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="10sp" />
+            android:text="10/10/10 10:10"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
         <LinearLayout
 
