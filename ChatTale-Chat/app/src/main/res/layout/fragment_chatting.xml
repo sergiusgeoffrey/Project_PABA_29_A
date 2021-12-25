@@ -41,9 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:paddingLeft="15dp"
                 android:text="Anonymous Duck and 1 Other"
+                android:maxLines="1"
+                android:maxLength="25"
+                android:ellipsize="end"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>

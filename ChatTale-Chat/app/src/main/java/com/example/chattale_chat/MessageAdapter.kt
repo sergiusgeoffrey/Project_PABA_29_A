@@ -43,6 +43,10 @@ class MessageAdapter(private val messageList: List<Message>) :
         calins.timeInMillis = currentMessage.timestamp!!
         val myFormat = "dd/MM/yyyy hh:mm"
         val sdf = SimpleDateFormat(myFormat)
+        holder.receiveBody.visibility = View.GONE
+        holder.sendBody.visibility = View.GONE
+        holder.systemBody.visibility = View.GONE
+
 
         if(currentMessage.isSystem == true){
             holder.systemBody.visibility = View.VISIBLE
@@ -53,13 +57,32 @@ class MessageAdapter(private val messageList: List<Message>) :
                 holder.receiveBody.visibility = View.VISIBLE
                 holder.receiveMessage.text = currentMessage.message
                 holder.receiveTimestamp.text = sdf.format(calins.time)
-                holder.receiveUsername.text = currentMessage.fromUsername
+
+                MainActivity.fetchDisplayName(currentMessage.fromUsername!!, object : MainActivity.fetchDisplayNameCallback {
+                    override fun onFetchDone(displayName: String) {
+                        holder.receiveUsername.text = displayName
+                    }
+
+                    override fun onFetchDone(displayNames: MutableList<String>) {
+                        // none
+                    }
+                })
+
 
             }else{
                 holder.sendBody.visibility = View.VISIBLE
                 holder.sendMessage.text = currentMessage.message
                 holder.sendTimestamp.text = sdf.format(calins.time)
-                holder.sendUsername.text = currentMessage.fromUsername
+
+                MainActivity.fetchDisplayName(currentMessage.fromUsername!!, object : MainActivity.fetchDisplayNameCallback {
+                    override fun onFetchDone(displayName: String) {
+                        holder.sendUsername.text = displayName
+                    }
+
+                    override fun onFetchDone(displayNames: MutableList<String>) {
+                        // none
+                    }
+                })
             }
 
         }

@@ -29,7 +29,18 @@ class NewMemberAdapter(private val memberSet: MutableSet<String>):RecyclerView.A
                 notifyItemRangeChanged(position,memberSet.size)
             }
         }
-        holder.usernameText.text = currentUsername
+        MainActivity.fetchDisplayName(currentUsername, object : MainActivity.fetchDisplayNameCallback {
+            override fun onFetchDone(displayName: String) {
+                holder.usernameText.text = displayName
+                println(displayName)
+            }
+
+            override fun onFetchDone(displayNames: MutableList<String>) {
+                // none
+            }
+        })
+
+
     }
 
     override fun getItemCount(): Int {

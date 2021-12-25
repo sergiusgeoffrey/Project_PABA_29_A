@@ -108,6 +108,8 @@ class NewChatFragment : Fragment() {
                 chatroomLastMessage
             )
 
+            MainActivity.CurrentChatroom = newChatroom
+
             // set to firebase
             MainActivity.DB.collection("Chatrooms").document(randomUUIDString).set(newChatroom).addOnSuccessListener {
                 findNavController().navigate(R.id.action_newChatFragment_to_chattingFragment)

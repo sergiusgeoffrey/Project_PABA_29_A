@@ -1,10 +1,17 @@
 package com.example.chattale_chat
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +53,16 @@ class ChatListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val copyInviteCodeButton = view.findViewById<TextView>(R.id.copy_invite_code_button)
+
+        copyInviteCodeButton.setOnClickListener {
+            val clipboardManager = view.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("text", MainActivity.CurrentAccount.username)
+            clipboardManager.setPrimaryClip(clipData)
+            Toast.makeText(view.context, "Invite code copied to clipboard!", Toast.LENGTH_LONG).show()
+        }
+
         currentView = view
         intervaler = Timer()
         intervaler.scheduleAtFixedRate(object : TimerTask() {
@@ -57,6 +74,10 @@ class ChatListFragment : Fragment() {
         val logoutButton = view.findViewById<ImageView>(R.id.logout_image)
         logoutButton.setOnClickListener{
             MainActivity.auth.signOut()
+            MainActivity.UsernameTable = mutableMapOf<String, String>()
+            MainActivity.ChatroomList = mutableListOf()
+            MainActivity.CurrentAccount = Account(null, null, null)
+            MainActivity.CurrentChatroom = Chatroom(null, null, null, null)
             findNavController().navigate(R.id.action_chatListFragment_to_loginFragment)
         }
 
@@ -91,6 +112,11 @@ class ChatListFragment : Fragment() {
 
     fun refreshChatrooms() {
         val chatrooms = mutableListOf<Chatroom>()
+        if(MainActivity.CurrentAccount.username == null){
+            intervaler.cancel()
+            intervaler.purge()
+            return
+        }
         MainActivity.DB.collection("Chatrooms")
             .whereArrayContains("members", MainActivity.CurrentAccount.username!!).get()
             .addOnSuccessListener { documents ->
@@ -118,7 +144,12 @@ class ChatListFragment : Fragment() {
                 chatrooms.sortByDescending { it.lastMessage?.timestamp }
                 val chatlistRecyclerView = currentView.findViewById<RecyclerView>(R.id.chatlist_container)
                 chatlistRecyclerView.layoutManager = LinearLayoutManager(parentFragment?.requireContext())
-                chatlistRecyclerView.adapter = ChatroomAdapter(chatrooms, findNavController())
+                try{
+                    chatlistRecyclerView.adapter = ChatroomAdapter(chatrooms, findNavController())
+                }catch (e : IllegalStateException){
+                    intervaler.cancel()
+                    intervaler.purge()
+                }
             }
     }
 

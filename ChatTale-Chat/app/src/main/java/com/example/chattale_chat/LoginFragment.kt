@@ -64,6 +64,9 @@ class LoginFragment : Fragment() {
                         val anonymous = data?.get("anonymous").toString().toBoolean()
                         if(username != null && displayName != null && anonymous != null)
                         {
+                            MainActivity.UsernameTable = mutableMapOf<String, String>()
+                            MainActivity.ChatroomList = mutableListOf()
+                            MainActivity.CurrentChatroom = Chatroom(null, null, null, null)
                             MainActivity.CurrentAccount = Account(username, anonymous, displayName)
                         }
                         findNavController().navigate(R.id.action_loginFragment_to_chatListFragment)

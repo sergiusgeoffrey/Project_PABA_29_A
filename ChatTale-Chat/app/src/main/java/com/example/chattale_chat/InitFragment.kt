@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,10 +46,13 @@ class InitFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // init all statics
+        MainActivity.UsernameTable = mutableMapOf<String, String>()
         MainActivity.ChatroomList = mutableListOf()
         MainActivity.CurrentAccount = Account(null, null, null)
         MainActivity.CurrentChatroom = Chatroom(null, null, null, null)
         MainActivity.DB = FirebaseFirestore.getInstance()
+        MainActivity.auth = FirebaseAuth.getInstance()
+
 
         // scuff splashscreen
         Handler(Looper.getMainLooper()).postDelayed({

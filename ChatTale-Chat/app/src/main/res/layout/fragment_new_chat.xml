@@ -33,7 +33,7 @@
                 android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="32dp"
@@ -42,7 +42,7 @@
                 android:text="Create new chatroom"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:layout_gravity="center" />
+                tools:layout_gravity="center|left" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +63,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_weight="1"
-                android:hint="Display name" />
+                android:hint="Chatroom name..." />
 
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:hint="Invite username..." />
+                android:hint="User Invite Code..." />
 
             <ImageButton
                 android:id="@+id/add_member_button"

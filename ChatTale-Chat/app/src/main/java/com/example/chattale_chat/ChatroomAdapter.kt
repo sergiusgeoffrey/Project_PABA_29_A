@@ -37,10 +37,21 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
             holder.chatroomDisplayPic.setImageResource(R.drawable.ic_baseline_person_24)
         }
         if (currentChatroom.displayName == "") {
-            holder.chatroomDisplayName.text =
-                currentChatroom.members!!.joinToString(", ", limit = 3)
+
+            MainActivity.fetchDisplayName(currentChatroom.members!! , object : MainActivity.fetchDisplayNameCallback {
+                override fun onFetchDone(displayName: String) {
+                   // none
+                }
+
+                override fun onFetchDone(displayNames: MutableList<String>) {
+                    holder.chatroomDisplayName.text =
+                        displayNames.joinToString(", ")
+                }
+            })
+
+
         } else {
-            holder.chatroomDisplayName.text = currentChatroom.displayName!!.take(20)
+            holder.chatroomDisplayName.text = currentChatroom.displayName!!
         }
         if (currentChatroom.lastMessage!!.messageID == null || currentChatroom.lastMessage!!.messageID == "null") {
             holder.chatroomLastMessage.visibility = View.GONE
@@ -55,10 +66,16 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
             if (currentChatroom.lastMessage!!.isSystem == true) {
                 holder.chatroomLastMessage.text = currentChatroom.lastMessage!!.message!!
             } else {
-                holder.chatroomLastMessage.text =
-                    currentChatroom.lastMessage!!.fromUsername + ": " + currentChatroom.lastMessage!!.message!!.take(
-                        20
-                    )
+                MainActivity.fetchDisplayName(currentChatroom.lastMessage!!.fromUsername!!, object : MainActivity.fetchDisplayNameCallback {
+                    override fun onFetchDone(displayName: String) {
+                        holder.chatroomLastMessage.text =
+                            displayName+ ": " + currentChatroom.lastMessage!!.message!!
+                    }
+
+                    override fun onFetchDone(displayNames: MutableList<String>) {
+                        // none
+                    }
+                })
             }
 
             holder.chatroomTimestamp.text = sdf.format(calins.time)
@@ -119,56 +136,67 @@ class ChatroomAdapter(private val chatroomList: List<Chatroom>, private val navC
 
         holder.leaveButton.setOnClickListener {
 
-            MainActivity.DB.collection("Chatrooms").document(currentChatroom!!.chatroomID!!).get()
+            MainActivity.DB.collection("Chatrooms").document(currentChatroom!!.chatroomID.toString()).get()
                 .addOnSuccessListener { document ->
-                    val newLastMessageHashMap: HashMap<String, Any> =
-                        document.get("lastMessage") as HashMap<String, Any>
-                    val newLastMessage = Message(
-                        newLastMessageHashMap["messageID"] as String?,
-                        newLastMessageHashMap["chatroomID"] as String?,
-                        newLastMessageHashMap["fromUsername"] as String?,
-                        newLastMessageHashMap["timestamp"] as Long?,
-                        newLastMessageHashMap["message"] as String?,
-                        newLastMessageHashMap["isSystem"] as Boolean?
-                    )
+                    if (document!= null){
+                        val newLastMessageHashMap: HashMap<String, Any> =
+                            document.get("lastMessage") as HashMap<String, Any>
+                        val newLastMessage = Message(
+                            newLastMessageHashMap["messageID"] as String?,
+                            newLastMessageHashMap["chatroomID"] as String?,
+                            newLastMessageHashMap["fromUsername"] as String?,
+                            newLastMessageHashMap["timestamp"] as Long?,
+                            newLastMessageHashMap["message"] as String?,
+                            newLastMessageHashMap["isSystem"] as Boolean?
+                        )
 
-                    val newChatroom = Chatroom(
-                        document.get("chatroomID") as String?,
-                        document.get("displayName") as String?,
-                        document.get("members") as List<String>?,
-                        newLastMessage
-                    )
-                    val newmember = newChatroom.members!!.toMutableList()
-                    newmember.remove(MainActivity.CurrentAccount.username)
-                    newChatroom.members = newmember.toList()
+                        val newChatroom = Chatroom(
+                            document.get("chatroomID") as String?,
+                            document.get("displayName") as String?,
+                            document.get("members") as List<String>?,
+                            newLastMessage
+                        )
+                        val newmember = newChatroom.members!!.toMutableList()
+                        newmember.remove(MainActivity.CurrentAccount.username)
+                        newChatroom.members = newmember.toList()
 
 
 
-                    val uuid = UUID.randomUUID()
-                    val randomUUIDString = uuid.toString()
+                        val uuid = UUID.randomUUID()
+                        val randomUUIDString = uuid.toString()
 
-                    val unixTime = System.currentTimeMillis()
+                        val unixTime = System.currentTimeMillis()
 
-                    val exitMessage = Message(
-                        randomUUIDString,
-                        currentChatroom!!.chatroomID!!,
-                        MainActivity.CurrentAccount.username,
-                        unixTime,
-                        MainActivity.CurrentAccount.username + " has left the chat",
-                        true
-                    )
+                        MainActivity.fetchDisplayName(MainActivity.CurrentAccount.username!!, object : MainActivity.fetchDisplayNameCallback {
+                            override fun onFetchDone(displayName: String) {
+                                val exitMessage = Message(
+                                    randomUUIDString,
+                                    currentChatroom!!.chatroomID!!,
+                                    MainActivity.CurrentAccount.username,
+                                    unixTime,
+                                    displayName + " has left the chat",
+                                    true
+                                )
 
-                    newChatroom.lastMessage = exitMessage
+                                newChatroom.lastMessage = exitMessage
 
-                    if (newmember.size > 0) {
-                        MainActivity.DB.collection("Chatrooms")
-                            .document(currentChatroom!!.chatroomID!!).set(newChatroom)
-                    } else {
-                        MainActivity.DB.collection("Chatrooms")
-                            .document(currentChatroom!!.chatroomID!!).delete()
+                                if (newmember.size > 0) {
+                                    MainActivity.DB.collection("Chatrooms")
+                                        .document(currentChatroom!!.chatroomID!!).set(newChatroom)
+                                } else {
+                                    MainActivity.DB.collection("Chatrooms")
+                                        .document(currentChatroom!!.chatroomID!!).delete()
+                                }
+
+                                MainActivity.DB.collection("Messages").document(exitMessage!!.messageID!!).set(exitMessage)
+                            }
+
+                            override fun onFetchDone(displayNames: MutableList<String>) {
+                                // none
+                            }
+                        })
                     }
 
-                    MainActivity.DB.collection("Messages").document(exitMessage!!.messageID!!).set(exitMessage)
                 }
 
         }

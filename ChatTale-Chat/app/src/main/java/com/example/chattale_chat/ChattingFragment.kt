@@ -53,10 +53,20 @@ class ChattingFragment : Fragment() {
         val chatroomMessageField = view.findViewById<EditText>(R.id.message_input)
 
         if (MainActivity.CurrentChatroom.displayName == "") {
-            chatroomDisplayName.text =
-                MainActivity.CurrentChatroom.members!!.joinToString(", ", limit = 3)
+
+            MainActivity.fetchDisplayName(MainActivity.CurrentChatroom.members!! , object : MainActivity.fetchDisplayNameCallback {
+                override fun onFetchDone(displayName: String) {
+                    // none
+                }
+
+                override fun onFetchDone(displayNames: MutableList<String>) {
+                    chatroomDisplayName.text =
+                        displayNames.joinToString(", ")
+                }
+            })
+
         } else {
-            chatroomDisplayName.text = MainActivity.CurrentChatroom.displayName!!.take(20)
+            chatroomDisplayName.text = MainActivity.CurrentChatroom.displayName.toString()
         }
 
         ChattingFragment.currentView = view
@@ -156,6 +166,12 @@ class ChattingFragment : Fragment() {
     }
 
     fun refreshMessages() {
+        if(MainActivity.CurrentChatroom!!.chatroomID == null){
+            ChattingFragment.intervaler.cancel()
+            ChattingFragment.intervaler.purge()
+            return
+        }
+
         MainActivity.DB.collection("Chatrooms")
             .document(MainActivity.CurrentChatroom!!.chatroomID!!).get()
             .addOnSuccessListener { document ->

@@ -33,7 +33,11 @@
             android:layout_weight="1"
             android:text="chatroomname"
             android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:ellipsize="end"
+            />
 
         <TextView
             android:id="@+id/chatroom_comp_lastmessage"
@@ -41,6 +45,9 @@
             android:layout_height="wrap_content"
             android:text="lastmessage"
             android:visibility="visible"
+            android:maxLines="1"
+            android:maxLength="30"
+            android:ellipsize="end"
             android:textSize="13sp" />
 
 

@@ -1,12 +1,12 @@
 package com.example.chattale_chat
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +43,11 @@ class BypassLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        MainActivity.UsernameTable = mutableMapOf<String, String>()
+        MainActivity.ChatroomList = mutableListOf()
+        MainActivity.CurrentAccount = Account(null, null, null)
+        MainActivity.CurrentChatroom = Chatroom(null, null, null, null)
+
         // THIS IS VERY VERY WRONG TO DO, WINSON, THIS IS UR PART YE
 
         val usernameInput = view.findViewById<EditText>(R.id.username_input)
@@ -53,13 +58,28 @@ class BypassLoginFragment : Fragment() {
             // DISCLAIMER, THIS IS TEMPORARY
             // on login click, create new account and push to server
             val usernameString = usernameInput.text.toString()
+
+            // check if avail
+            MainActivity.DB.collection("Accounts").document(usernameString).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        MainActivity.CurrentAccount = Account(
+                            document["username"] as String,
+                            document["anonymous"] as Boolean,
+                            document["displayName"] as String
+                        )
+                    }else{
+                        // set username of collection "Accounts" with the Account object just created
+                        MainActivity.CurrentAccount = Account(usernameString,true,"")
+                        MainActivity.DB.collection("Accounts").document(usernameString)
+                            .set(MainActivity.CurrentAccount).addOnSuccessListener {
+                                // then if success go to chat list
+                            }
+                    }
+                    findNavController().navigate(R.id.action_bypassLoginFragment_to_chatListFragment)
+                }
+
             // WARN! no username checking + username length check + etc!
-            MainActivity.CurrentAccount = Account(usernameString,true,usernameString)
-            // set username of collection "Accounts" with the Account object just created
-            MainActivity.DB.collection("Accounts").document(usernameString).set(MainActivity.CurrentAccount).addOnSuccessListener {
-                // then if success go to chat list
-                findNavController().navigate(R.id.action_bypassLoginFragment_to_chatListFragment)
-            }
             // WARN! no on failed listener!
         }
 

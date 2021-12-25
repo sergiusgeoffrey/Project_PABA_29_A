@@ -80,7 +80,8 @@
         <action
             android:id="@+id/action_newChatFragment_to_chattingFragment"
             app:destination="@id/chattingFragment"
-            app:popUpTo="@id/newChatFragment" />
+            app:popUpTo="@id/newChatFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/bypassLoginFragment"

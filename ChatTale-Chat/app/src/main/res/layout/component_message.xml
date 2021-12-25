@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/message_comp_body_receive"
         android:padding="10dp">
 
@@ -37,6 +37,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="receivername"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -69,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/message_comp_body_send"
-        android:visibility="gone"
+        android:visibility="visible"
 
         android:padding="10dp">
 
@@ -100,6 +103,9 @@
                 android:layout_weight="1"
                 android:text="sendername"
                 android:textSize="10sp"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:textStyle="bold" />
 
@@ -134,7 +140,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/message_comp_body_system"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:padding="10dp">
 
         <TextView
@@ -143,6 +149,9 @@
             android:layout_height="wrap_content"
             android:text="Your ****** has left the chat"
             android:visibility="visible"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="10sp" />
 
         <TextView
