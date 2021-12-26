@@ -26,20 +26,21 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            >
+            android:background="@drawable/bubble_in"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+
             <TextView
                 android:id="@+id/message_comp_displayname_receive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="receivername"
+                android:ellipsize="end"
                 android:maxLength="50"
                 android:maxLines="1"
-                android:ellipsize="end"
+                android:text="receivername"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -48,8 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="lastmessagedfkjdf\nlkjdlkjasdklas\njhaskjd\nlksdjfhdf"
-                android:visibility="visible"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="visible" />
 
 
         </LinearLayout>
@@ -93,22 +94,23 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingRight="20dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            >
+            android:background="@drawable/bubble_out"
+            android:orientation="vertical"
+            android:paddingRight="20dp">
+
             <TextView
                 android:id="@+id/message_comp_displayname_send"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="sendername"
-                android:textSize="10sp"
-                android:maxLength="50"
-                android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="right"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:text="sendername"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,8 +119,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="lastmessagedfkjdf\nlkjdlkjasdklas\njhaskjd\nlksdjfhdf"
-                android:visibility="visible"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="visible" />
 
 
         </LinearLayout>
