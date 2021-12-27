@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chatroom_comp_body"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="6dp"
-    android:background="@drawable/chatroom_squared"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/chatroom_rounded"
     android:orientation="horizontal"
-    app:layout_goneMarginBottom="4dp">
+    app:layout_goneMarginBottom="4dp"
+    app:layout_goneMarginEnd="8dp">
 
     <ImageView
         android:id="@+id/chatroom_comp_displaypic"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:paddingLeft="15dp"
         android:scaleX="1.75"
@@ -25,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:paddingLeft="20dp">
 
@@ -33,7 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLength="20"
@@ -48,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="6dp"
             android:ellipsize="end"
             android:maxLength="30"
             android:maxLines="1"
@@ -73,14 +81,17 @@
     <ImageButton
         android:id="@+id/chatroom_comp_leave"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|right"
         android:background="#00000000"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:paddingRight="15dp"
         android:scaleX="1.25"
         android:scaleY="1.25"
         android:src="@drawable/ic_baseline_logout_24"
-        android:visibility="visible" />
+        android:visibility="visible"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </LinearLayout>
