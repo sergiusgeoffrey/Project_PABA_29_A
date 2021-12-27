@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--Shadow Layer-->
-
     <item>
         <rotate
             android:fromDegrees="40"
@@ -29,9 +27,6 @@
             <solid android:color="#01000000" />
         </shape>
     </item>
-
-    <!--===============-->
-
     <item>
         <rotate
             android:fromDegrees="40"
@@ -52,9 +47,6 @@
             <solid android:color="#09000000" />
         </shape>
     </item>
-
-    <!--===============-->
-
     <item>
         <rotate
             android:fromDegrees="40"
@@ -81,11 +73,6 @@
             <solid android:color="#10000000" />
         </shape>
     </item>
-
-    <!--===============-->
-
-
-    <!--ForeGround-->
 
     <item>
         <rotate
