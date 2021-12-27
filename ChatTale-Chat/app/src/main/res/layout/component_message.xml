@@ -13,21 +13,25 @@
         android:padding="10dp">
 
         <ImageView
-            android:layout_gravity="center"
-            android:paddingLeft="15dp"
-            android:scaleY="1.75"
-            android:scaleX="1.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_person_24"
-            />
+            android:layout_gravity="top"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:foregroundGravity="top"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:scaleX="1.75"
+            android:scaleY="1.75"
+            android:src="@drawable/ic_baseline_person_24" />
 
         <LinearLayout
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginTop="6dp"
+            android:layout_weight="0"
             android:background="@drawable/bubble_in"
             android:orientation="vertical"
             android:paddingLeft="20dp">
@@ -36,6 +40,8 @@
                 android:id="@+id/message_comp_displayname_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
@@ -49,6 +55,8 @@
                 android:id="@+id/message_comp_message_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="lastmessagedfkjdf\nlkjdlkjasdklas\njhaskjd\nlksdjfhdf"
                 android:textSize="15sp"
@@ -60,8 +68,10 @@
         <TextView
             android:id="@+id/message_comp_timestamp_receive"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal"
+            android:layout_marginStart="4dp"
+            android:layout_weight="0"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -72,19 +82,22 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/message_comp_body_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/message_comp_body_send"
-        android:visibility="visible"
+        android:foregroundGravity="right"
+        android:gravity="right"
 
-        android:padding="10dp">
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/message_comp_timestamp_send"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|top"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="4dp"
             android:gravity="center"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -94,10 +107,11 @@
 
         <LinearLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginTop="6dp"
+            android:layout_weight="0"
             android:background="@drawable/bubble_out"
             android:orientation="vertical"
             android:paddingRight="20dp">
@@ -107,7 +121,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_margin="6dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="right"
@@ -122,6 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="6dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="right"
                 android:text="lastmessagedfkjdf\nlkjdlkjasdklas\njhaskjd\nlksdjfhdf"
@@ -132,19 +150,20 @@
         </LinearLayout>
 
 
-
         <ImageView
-            android:layout_gravity="center"
-            android:paddingRight="15dp"
-            android:scaleY="1.75"
-            android:scaleX="1.75"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_person_24"
-            />
+            android:layout_gravity="top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:scaleX="1.75"
+            android:scaleY="1.75"
+            android:src="@drawable/ic_baseline_person_24" />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,21 +176,23 @@
             android:id="@+id/message_comp_message_system"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your ****** has left the chat"
-            android:visibility="visible"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
             android:maxLength="50"
             android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="10sp" />
+            android:text="Your ****** has left the chat"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/message_comp_timestamp_system"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10/10/10 10:10"
-            android:visibility="visible"
+            android:layout_marginBottom="4dp"
             android:paddingLeft="12dp"
-            android:textSize="10sp" />
+            android:text="10/10/10 10:10"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
     </LinearLayout>
 
