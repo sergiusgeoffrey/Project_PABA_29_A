@@ -78,20 +78,38 @@
         android:textSize="10sp"
         android:visibility="visible" />
 
-    <ImageButton
-        android:id="@+id/chatroom_comp_leave"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center|right"
-        android:background="#00000000"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:paddingRight="15dp"
-        android:scaleX="1.25"
-        android:scaleY="1.25"
-        android:src="@drawable/ic_baseline_logout_24"
-        android:visibility="visible"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_marginEnd="12dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/chatroom_comp_leave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:minWidth="36dp"
+            android:minHeight="36dp"
+            android:scaleX="1.25"
+            android:scaleY="1.25"
+            android:src="@drawable/ic_baseline_logout_24"
+            android:visibility="visible"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:text="Leave Chat"
+            android:textColor="#FDFDFD"
+            android:textSize="8sp" />
+    </LinearLayout>
 
 
 </LinearLayout>
